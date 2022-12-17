@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event bubbling helps to achieve event delegation</title>
+    
+</head>
+<body>
+    <div id="category">
+        <ul>
+            <li class="eventLi" id="laptop"> Laptop </li>
+            <li class="eventLi" id="camera"> Camera </li>
+            <li class="eventLi" id="mobile"> Mobile </li>
+            <li><input type="text" data-uppercase></li>
+        </ul>
+    </div>
+    <div class="allCheckBoxes">
+        <h3>Select or Deselect all or some checkboxes as per your mood:</h3>  
+    <input type="checkbox" name="chk" value="Smile">Smile<br>  
+    <input type="checkbox" name="chk" value="Cry">Cry<br>  
+    <input type="checkbox" name="chk" value="Laugh">Laugh<br>  
+    <input type="checkbox" name="chk" value="Angry">Angry<br>  
+     <br>  
+        <input type="button" onclick='selects()' value="Select All"/>  
+        <input type="button" onclick='deSelect()' value="Deselect All"/>  
+    </div>
+    <script>
+        document.querySelector('#category').addEventListener('click', function(e){
+            // behavioural pattern can be re used using event bubbling
+            if(e.target.className === 'eventLi'){
+                const composed = e.composedPath()
+                console.log(composed)
+              //  window.location = "/"+e.target.id;
+
+
+              // Event flow - a particuar web page receives the event
+              // the process of event flow 
+            //   Event Capturing   Event Target  Event Bubbling
+            }
+
+        });
+        function selects(){  
+                var ele=document.getElementsByName('chk');  
+                // ele.forEach(element => {
+                //     if(element.type == 'checkbox')
+                //     element.checked = true;
+                // });
+                for(let element=0; element < ele.length; element++){
+                    if(ele[element].type == 'checkbox')
+                    ele[element].checked = true;
+                }
+             //   console.log(ele)
+            //    ele.map(e => {
+            //     if(e.type == 'checkbox'){
+            //         return e.checked = true;
+            //     }
+            //    })
+//             The returning value
+// Ability to chain other methods
+// Mutability
+// Performance Speed
+            }  
+            function deSelect(){  
+                var ele=document.getElementsByName('chk');  
+                for(var i=0; i<ele.length; i++){  
+                    if(ele[i].type=='checkbox')  
+                        ele[i].checked=false;  
+                      
+                }  
+            }        
+    </script>
+</body>
+</html>
